@@ -1,43 +1,25 @@
-from django.http import HttpResponse
-import datetime
-from django.template import Template, Context
-
-def saludo(request):   #Nuestra primera vista :) 
-	return HttpResponse("Hola Django - Coder")
-
-
-def segunda_vista(request):
-    return HttpResponse("<br><br>Ya entendimos esto, es muy simple :) ")
-
-def diaDeHoy(request):
-
-        dia = datetime.datetime.now()
-
-        documentoDeTexto = f"Hoy es día: <br> {dia}"
-
-
-        return HttpResponse(documentoDeTexto)
-
-
-def miNombreEs(self, nombre):
-
-      documentoDeTexto = f"Mi nombre es: <br><br>  {nombre}"
-
-
-      return HttpResponse(documentoDeTexto)
-
-
-def probandoTemplate(self):
-
-    miHtml = open("C:\Users\osval\OneDrive\Documentos\PYTHON\CURSO\Proyecto1\Proyecto1\templates")
-
-    plantilla = Template(miHtml.read()) #Se carga en memoria nuestro documento, template1   
-    ##OJO importar template y contex, con: from django.template import Template, Context
-
-    miHtml.close() #Cerramos el archivo
-
-    miContexto = Context() #EN este caso no hay nada ya que no hay parametros, IGUAL hay que crearlo
-
-    documento = plantilla.render(miContexto) #Aca renderizamos la plantilla en documento
-
-    return HttpResponse(documento)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p style="color: red"> Hola {{nombre}}, estamos haciendo uso de variables por contexto</p>
+    <p style="color: green">Y podemos acceder al apellido "{{apellido}}" porque tenemos acceso a ambas variables.<br>
+    Tambien aplicamos estilos pero luego lo haremos con CSS porque no es buena practica hacerlo en el archivo html.</p>
+    <h2>Notas:</h2>
+    {% for n in notas %}
+        <p>Nota: {{n}}</p>
+    {% endfor %}
+    {% for n in notas %}
+    {% if n <= 4 %}
+        <p style="color: red">Reprobado: {{n}}</p>
+    {% else %}
+        <p style="color: green">Aprobado: {{n}}</p>
+    {% endif %}
+{% endfor %}
+</body>
+</html>
