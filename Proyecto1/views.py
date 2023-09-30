@@ -32,3 +32,11 @@ def usando_Loader(request):
     plantilla = loader.get_template('index.html')
     documento = plantilla.render(diccionario)
     return HttpResponse(documento)
+
+from proyecto1App.models import Curso
+
+def curso(request, nombre, numero):
+    curso = Curso(nombre=nombre, camada=int(numero))
+    curso.save()
+    documento = f"Curso: {curso.nombre}<br>Camada: {curso.camada}"
+    return HttpResponse(documento)
