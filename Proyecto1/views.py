@@ -1,7 +1,6 @@
 # Agregamos al encabezado del archivo el import de Template y de Context
 from django.http import HttpResponse
-from django.template import Template, Context
-from django.template import loader
+from django.template import Template, Context, loader
 
 def probando_template(request):
 
@@ -28,7 +27,8 @@ def probando_template(request):
 def usando_Loader(request):
     nombre = "Osvaldo"
     apellido = "Vasquez"
-    diccionario = {"nombre": nombre, "apellido": apellido, "notas": [4, 8, 9, 10, 7, 8]}
+    notas = [4, 8, 9, 10, 7, 8]
+    diccionario = {"nombre": nombre, "apellido": apellido, "notas": notas}
     plantilla = loader.get_template('index.html')
     documento = plantilla.render(diccionario)
     return HttpResponse(documento)
