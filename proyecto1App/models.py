@@ -2,22 +2,37 @@ from django.db import models
 
 # Create your models here.
 
-class Curso(models.Model):
+class libro(models.Model):
     nombre = models.CharField(max_length=40)
-    camada = models.IntegerField()
+    autor = models.CharField(max_length=40)
+    editorial = models.CharField(max_length=40)
+    genero = models.CharField(max_length=40)
+    sinopsis = models.CharField(max_length=40)
+    numpag = models.IntegerField()
+    fecha_pub = models.DateField()
 
-class Estudiante(models.Model):
+class ebook(models.Model):
+    nombre = models.CharField(max_length=40)
+    autor = models.CharField(max_length=40)
+    editorial = models.CharField(max_length=40)
+    genero = models.CharField(max_length=40)
+    sinopsis = models.CharField(max_length=40)
+    numpag = models.IntegerField()
+    aplicativo = models.CharField(max_length=40)
+    fecha_pub = models.DateField
+
+class autor(models.Model):
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=20)
     email = models.EmailField(max_length=40)
+    nacionalidad = models.CharField(max_length=40)
+    genero = models.CharField(max_length=40)
+    premios = models.CharField(max_length=40)
 
-class Profesor(models.Model):
+class revista(models.Model):
     nombre = models.CharField(max_length=40)
-    apellido = models.CharField(max_length=20)
-    email = models.EmailField(max_length=40)
-    apellido = models.CharField(max_length=30)
-
-class Entregable(models.Model):
-    nombre = models.CharField(max_length=30)
-    fecha_de_entrega = models.DateField()
-    entregado = models.BooleanField()
+    webpage = models.URLField(max_length=40)
+    genero = models.CharField(max_length=40)
+    temas = models.CharField(max_length=40)
+    numpag = models.IntegerField()
+    fecha_pub = models.DateField

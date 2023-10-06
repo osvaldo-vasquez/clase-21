@@ -1,0 +1,18 @@
+{% extends "proyecto1App/base.html" %}
+
+{% load static %}
+
+{% block title %} Formulario de libro {% endblock title %}
+
+{% block contenidoquecambia %}
+    <form action = "" method = "POST">
+        {% csrf_token %}
+        <table>
+            {{ miFormulario.as_table }}
+        </table>
+        
+        <input type = "submit" value  = "Guardar libro">
+    
+    </form>
+
+{% endblock contenidoquecambia %}
