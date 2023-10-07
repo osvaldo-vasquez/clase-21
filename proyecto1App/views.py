@@ -27,8 +27,8 @@ def libroForm(request):
  
         if miFormulario.is_valid():
                   informacion = miFormulario.cleaned_data
-                  libro = libro(nombre=informacion["nombre"], autor=informacion["autor"], editorial=informacion["editorial"], genero=informacion["genero"], sinopsis=informacion["sinopsis"], numpag=informacion["numpag"])
-                  libro.save()
+                  nuevo_libro = libro(nombre=informacion["nombre"], autor=informacion["autor"], editorial=informacion["editorial"], genero=informacion["genero"], sinopsis=informacion["sinopsis"], numpag=informacion['numpag'], fecha_pub=informacion['fecha_pub'], fecha_compra=informacion['fecha_compra'], ISBN =informacion['ISBN'])
+                  nuevo_libro.save()
                   return render(request, "proyecto1App/index.html")
     else:
             miFormulario = libroFormulario()

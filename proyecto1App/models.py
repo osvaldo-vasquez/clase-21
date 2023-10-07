@@ -9,7 +9,9 @@ class libro(models.Model):
     genero = models.CharField(max_length=40)
     sinopsis = models.CharField(max_length=40)
     numpag = models.IntegerField()
-    fecha_pub = models.DateField()
+    fecha_pub = models.DateField(default="2023-10-16")
+    fecha_compra = models.DateField(default="2023-10-16")
+    ISBN = models.CharField(max_length=40)
 
 class ebook(models.Model):
     nombre = models.CharField(max_length=40)

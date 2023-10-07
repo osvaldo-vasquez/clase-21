@@ -6,5 +6,9 @@ class libroFormulario(forms.Form):
     editorial = forms.CharField()
     genero = forms.CharField()
     sinopsis = forms.CharField()
-    numpag = forms.NumberInput()
+    numpag = forms.IntegerField()
+    fecha_pub = forms.DateField()
+    fecha_compra = forms.DateField()
+    ISBN = forms.CharField()
+
 
