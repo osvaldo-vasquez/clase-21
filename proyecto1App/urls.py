@@ -12,4 +12,7 @@ urlpatterns = [
     path('leerAutores/', views.leerAutores, name = "leerAutores"),
     path('buscarLibro/', views.buscarLibro, name = "buscarLibro"),
     path('buscar/', views.buscar),
+    path('borrar-libro/<int:libro_id>', views.borrar_libro, name = "borrarLibro"),
+    path('borrar-revista/<int:revista_id>', views.borrar_revista, name = "borrarRevista"),
+    path('borrar-autor/<int:autor_id>', views.borrar_autor, name = "borrarAutor"),
 ]

@@ -7,7 +7,7 @@
 <ul>
 {% for libro in libros %}
 
-    <li> {{libro}} </li>
+    <li> {{libro}} <a href = "{% url 'borrarLibro' libro.id%}" >Eliminar</a> </li>
 
 {% endfor %}
 </ul>

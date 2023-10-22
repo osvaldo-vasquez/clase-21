@@ -7,7 +7,7 @@
 <ul>
 {% for autor in autores %}
 
-    <li> {{autor}} </li>
+    <li> {{autor}} <a href = "{% url 'borrarAutor' autor.id%}" >Eliminar</a> </li>
 
 {% endfor %}
 </ul>

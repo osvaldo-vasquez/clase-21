@@ -7,7 +7,7 @@
 <ul>
 {% for revista in revistas %}
 
-    <li> {{revista}} </li>
+    <li> {{revista}} <a href = "{% url 'borrarRevista' revista.id%}" >Eliminar</a> </li>
 
 {% endfor %}
 </ul>

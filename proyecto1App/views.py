@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from proyecto1App.models import libro
 from proyecto1App.models import revista
@@ -9,9 +9,6 @@ from proyecto1App.forms import autorFormulario
 
 def inicio(request):
     return render(request, "proyecto1App/index.html")
-
-def autores(request):
-    return render(request, "proyecto1App/autores.html")
 
 def ebooks(request):
     return render(request, "proyecto1App/ebooks.html")
@@ -25,7 +22,7 @@ def libroForm(request):
  
         if miFormulario.is_valid():
                   informacion = miFormulario.cleaned_data
-                  nuevo_libro = libro(nombre=informacion["nombre"], autor=informacion["autor"], editorial=informacion["editorial"], genero=informacion["genero"], sinopsis=informacion["sinopsis"], numpag=informacion['num_pag'], fecha_pub=informacion['fecha_pub'], fecha_compra=informacion['fecha_compra'], ISBN =informacion['ISBN'], formato =informacion['formato'])
+                  nuevo_libro = libro(nombre=informacion["nombre"], autor=informacion["autor"], editorial=informacion["editorial"], genero=informacion["genero"], sinopsis=informacion["sinopsis"], numpag=informacion['numpag'], fecha_pub=informacion['fecha_pub'], fecha_compra=informacion['fecha_compra'], ISBN =informacion['ISBN'], formato =informacion['formato'])
                   nuevo_libro.save()
                   return render(request, "proyecto1App/index.html")
     else:
@@ -93,3 +90,25 @@ def leerRevistas(request):
 def leerAutores(request):
     autores =  autor.objects.all() # Trae todos las revistas
     return render(request, "proyecto1App/leerAutores.html", {"autores":autores})
+
+def borrar_libro(request, libro_id):
+    
+    libro_eliminar = libro.objects.get(id=int(libro_id))
+    libro_eliminar.delete()
+    return redirect('leerLibros')
+
+def borrar_revista(request, revista_id):
+    
+    revista_eliminar = revista.objects.get(id=int(revista_id))
+    revista_eliminar.delete()
+    return redirect('leerRevistas')
+
+def borrar_autor(request, autor_id):
+    
+    autor_eliminar = autor.objects.get(id=int(autor_id))
+    autor_eliminar.delete()
+    return redirect('leerAutores')
+
+
+
+      
