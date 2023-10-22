@@ -109,6 +109,83 @@ def borrar_autor(request, autor_id):
     autor_eliminar.delete()
     return redirect('leerAutores')
 
+def editar_libro(request, libro_id):
+    libroAeditar = libro.objects.get(id = libro_id)
+    if request.method == "POST":
+        
+        
+        miFormulario = libroFormulario(request.POST)
 
+        if miFormulario.is_valid():
+                  informacion = miFormulario.cleaned_data
+                  libroAeditar.nombre = informacion["nombre"]
+                  libroAeditar.autor = informacion["autor"]
+                  libroAeditar.editorial = informacion["editorial"]
+                  libroAeditar.genero = informacion["genero"]
+                  libroAeditar.numpag = informacion["numpag"]
+                  libroAeditar.fecha_pub = informacion["fecha_pub"]
+                  libroAeditar.fecha_compra = informacion["fecha_compra"]
+                  libroAeditar.ISBN = informacion["ISBN"]
+                  libroAeditar.formato = informacion["formato"]
+                  libroAeditar.save()
+                  return redirect('leerLibros')
+    else:
+            miFormulario = libroFormulario(initial = {"nombre":libroAeditar.nombre, "autor":libroAeditar.autor, "editorial":libroAeditar.editorial,
+                                            "genero":libroAeditar.genero, "sinopsis":libroAeditar.sinopsis, "numpag": libroAeditar.numpag, "fecha_pub":libroAeditar.fecha_pub,
+                                            "fecha_compra":libroAeditar.fecha_compra, "ISBN":libroAeditar.ISBN, "formato":libroAeditar.formato})
+ 
+    return render(request, "proyecto1App/libroFormulario.html", {"miFormulario": miFormulario})
+
+def editar_revista(request, revista_id):
+    revistaAeditar = revista.objects.get(id = revista_id)
+    if request.method == "POST":
+                
+        miFormulario = revistaFormulario(request.POST)
+
+        if miFormulario.is_valid():
+                  informacion = miFormulario.cleaned_data
+                  revistaAeditar.nombre = informacion["nombre"]
+                  revistaAeditar.titulo = informacion["titulo"]
+                  revistaAeditar.numero = informacion["numero"]
+                  revistaAeditar.web = informacion["web"]
+                  revistaAeditar.genero = informacion["genero"]
+                  revistaAeditar.temas = informacion["temas"]
+                  revistaAeditar.fecha_pub = informacion["fecha_pub"]
+                  revistaAeditar.fecha_compra = informacion["fecha_compra"]
+                  revistaAeditar.formato = informacion["formato"]
+                  revistaAeditar.save()
+                  return redirect('leerRevistas')
+    else:
+            miFormulario = revistaFormulario(initial = {"nombre":revistaAeditar.nombre, "titulo":revistaAeditar.titulo, "numero":revistaAeditar.numero,
+                                            "web":revistaAeditar.web, "genero":revistaAeditar.genero, "temas": revistaAeditar.temas, "fecha_pub":revistaAeditar.fecha_pub,
+                                            "fecha_compra":revistaAeditar.fecha_compra, "formato":revistaAeditar})
+ 
+    return render(request, "proyecto1App/libroFormulario.html", {"miFormulario": miFormulario})
+
+def editar_autor(request, autor_id):
+
+    autorAeditar = autor.objects.get(id = autor_id)
+ 
+    if request.method == "POST":
+ 
+        miFormulario = autorFormulario(request.POST)
+        print(miFormulario)
+ 
+        if miFormulario.is_valid():
+                  informacion = miFormulario.cleaned_data
+                  autorAeditar.nombre = informacion["nombre"]
+                  autorAeditar.apellido = informacion["apellido"]
+                  autorAeditar.email = informacion["email"]
+                  autorAeditar.nacionalidad = informacion["nacionalidad"]
+                  autorAeditar.genero = informacion["genero"]
+                  autorAeditar.premios = informacion["premios"]
+                  autorAeditar.biografia = informacion["biografia"]
+                  autorAeditar.save()
+                  return redirect('leerAutores')
+    else:
+            miFormulario = autorFormulario(initial = {"nombre":autorAeditar.nombre, "apellido":autorAeditar.apellido, "email":autorAeditar.email, "nacionalidad":autorAeditar.nacionalidad,
+                                                       "genero":autorAeditar.genero, "premios":autorAeditar.premios, "biografia":autorAeditar.biografia})
+ 
+    return render(request, "proyecto1App/autorFormulario.html", {"miFormulario": miFormulario})
 
       
