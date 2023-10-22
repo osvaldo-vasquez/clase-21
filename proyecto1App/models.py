@@ -40,8 +40,17 @@ class autor(models.Model):
 
 class revista(models.Model):
     nombre = models.CharField(max_length=40)
-    webpage = models.URLField(max_length=40)
+    titulo = models.CharField(max_length=40, default="revista1")
+    numero = models.IntegerField()
+    web = models.CharField(max_length=40, default="página web")
     genero = models.CharField(max_length=40)
     temas = models.CharField(max_length=40)
-    numpag = models.IntegerField()
-    fecha_pub = models.DateField
+    fecha_pub = models.DateField(default="2023-10-16")
+    fecha_compra = models.DateField(default="2023-10-16")
+    formato_op = (
+        ('digital', 'Digital'),
+        ('fisica', 'Física')
+    )
+    formato = models.CharField(max_length=20, choices=formato_op, default='fisica')
+    def __str__(self):
+        return f"Título: {self.nombre} - Autor: {self.editorial}"

@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from proyecto1App.models import libro
+from proyecto1App.models import revista
 from proyecto1App.forms import libroFormulario
+from proyecto1App.forms import revistaFormulario
 
 def inicio(request):
     return render(request, "proyecto1App/index.html")
@@ -31,6 +33,23 @@ def libroForm(request):
             miFormulario = libroFormulario()
  
     return render(request, "proyecto1App/libroFormulario.html", {"miFormulario": miFormulario})
+
+def revistaForm(request):
+ 
+    if request.method == "POST":
+ 
+        miFormulario = revistaFormulario(request.POST)
+        print(miFormulario)
+ 
+        if miFormulario.is_valid():
+                  informacion = miFormulario.cleaned_data
+                  nueva_revista = revista(nombre=informacion["nombre"], titulo=informacion["titulo"], numero = informacion["numero"], web = informacion["web"], genero=informacion["genero"], temas=informacion["temas"], fecha_pub=informacion['fecha_pub'], fecha_compra=informacion['fecha_compra'], formato =informacion['formato'])
+                  nueva_revista.save()
+                  return render(request, "proyecto1App/index.html")
+    else:
+            miFormulario = revistaFormulario()
+ 
+    return render(request, "proyecto1App/revistaFormulario.html", {"miFormulario": miFormulario})
 
 def buscarLibro(request):
     return render(request, "proyecto1App/buscarLibro.html")
