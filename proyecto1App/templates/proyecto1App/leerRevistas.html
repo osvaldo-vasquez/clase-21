@@ -1,0 +1,15 @@
+{% extends "proyecto1App/base.html" %}
+
+{% load static %}
+
+{% block contenidoquecambia %}
+
+<ul>
+{% for revista in revistas %}
+
+    <li> {{revista}} </li>
+
+{% endfor %}
+</ul>
+
+{% endblock contenidoquecambia %}

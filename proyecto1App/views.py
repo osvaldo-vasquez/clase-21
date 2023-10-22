@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from proyecto1App.models import libro
 from proyecto1App.models import revista
+from proyecto1App.models import autor
 from proyecto1App.forms import libroFormulario
 from proyecto1App.forms import revistaFormulario
+from proyecto1App.forms import autorFormulario
 
 def inicio(request):
     return render(request, "proyecto1App/index.html")
@@ -14,9 +16,6 @@ def autores(request):
 def ebooks(request):
     return render(request, "proyecto1App/ebooks.html")
 
-def revistas(request):
-    return render(request, "proyecto1App/revistas.html")
- 
 def libroForm(request):
  
     if request.method == "POST":
@@ -51,6 +50,24 @@ def revistaForm(request):
  
     return render(request, "proyecto1App/revistaFormulario.html", {"miFormulario": miFormulario})
 
+
+def autorForm(request):
+ 
+    if request.method == "POST":
+ 
+        miFormulario = autorFormulario(request.POST)
+        print(miFormulario)
+ 
+        if miFormulario.is_valid():
+                  informacion = miFormulario.cleaned_data
+                  nuevo_autor = autor(nombre=informacion["nombre"],apellido=informacion["apellido"], email = informacion["email"], nacionalidad = informacion["nacionalidad"], genero=informacion["genero"], premios=informacion["premios"], biografia=informacion['biografia'])
+                  nuevo_autor.save()
+                  return render(request, "proyecto1App/index.html")
+    else:
+            miFormulario = autorFormulario()
+ 
+    return render(request, "proyecto1App/autorFormulario.html", {"miFormulario": miFormulario})
+
 def buscarLibro(request):
     return render(request, "proyecto1App/buscarLibro.html")
 
@@ -68,3 +85,11 @@ def buscar(request):
 def leerLibros(request):
     libros =  libro.objects.all() # Trae todos los libros
     return render(request, "proyecto1App/leerLibros.html", {"libros":libros})
+
+def leerRevistas(request):
+    revistas =  revista.objects.all() # Trae todos las revistas
+    return render(request, "proyecto1App/leerRevistas.html", {"revistas":revistas})
+
+def leerAutores(request):
+    autores =  autor.objects.all() # Trae todos las revistas
+    return render(request, "proyecto1App/leerAutores.html", {"autores":autores})

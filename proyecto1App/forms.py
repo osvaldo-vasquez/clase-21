@@ -25,4 +25,11 @@ class revistaFormulario(forms.Form):
     fecha_compra = forms.DateField(label='Fecha de compra (mm/dd/aaaa)')
     formato = forms.ChoiceField(choices=revista.formato_op, required=True, widget=forms.RadioSelect, label='Formato')
 
-
+class autorFormulario(forms.Form):
+    nombre = forms.CharField(label='Nombre')
+    apellido = forms.CharField(label='Apellido')
+    email = forms.EmailField(label='e-mail')
+    nacionalidad =  forms.CharField(label='Nacionalidad')
+    genero = forms.CharField(label='Género')
+    premios = forms.CharField(label='Premios')
+    biografia = forms.CharField(label='Biografia')

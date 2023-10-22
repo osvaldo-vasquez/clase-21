@@ -33,10 +33,14 @@ class ebook(models.Model):
 class autor(models.Model):
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=20)
-    email = models.EmailField(max_length=40)
+    email = models.EmailField(max_length=40, default = "autor@correo.com")
     nacionalidad = models.CharField(max_length=40)
     genero = models.CharField(max_length=40)
-    premios = models.CharField(max_length=40)
+    premios = models.CharField(max_length=200)
+    biografia = models.CharField(max_length=200, default="Bio")
+    def __str__(self):
+        return f"Nombre: {self.nombre} - Apellido: {self.apellido}"
+
 
 class revista(models.Model):
     nombre = models.CharField(max_length=40)
@@ -53,4 +57,4 @@ class revista(models.Model):
     )
     formato = models.CharField(max_length=20, choices=formato_op, default='fisica')
     def __str__(self):
-        return f"Título: {self.nombre} - Autor: {self.editorial}"
+        return f"Título: {self.nombre} - Autor: {self.titulo}"
