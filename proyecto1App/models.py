@@ -12,6 +12,13 @@ class libro(models.Model):
     fecha_pub = models.DateField(default="2023-10-16")
     fecha_compra = models.DateField(default="2023-10-16")
     ISBN = models.CharField(max_length=40)
+    formato_op = (
+        ('ebook', 'eBook'),
+        ('libro_fisico', 'Libro Físico')
+    )
+    formato = models.CharField(max_length=20, choices=formato_op, default='libro_fisico')
+    def __str__(self):
+        return f"Título: {self.nombre} - Autor: {self.autor}"
 
 class ebook(models.Model):
     nombre = models.CharField(max_length=40)

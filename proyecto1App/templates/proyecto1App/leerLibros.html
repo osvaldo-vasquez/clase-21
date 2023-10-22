@@ -4,6 +4,12 @@
 
 {% block contenidoquecambia %}
 
-<h1> CURSOS </h1>
+<ul>
+{% for libro in libros %}
+
+    <li> {{libro}} </li>
+
+{% endfor %}
+</ul>
 
 {% endblock contenidoquecambia %}
